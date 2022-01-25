@@ -2,6 +2,7 @@ import { Form, Button } from "react-bootstrap";
 import { useRef, useContext } from 'react';
 import AuthContext from '../../store/auth-context';
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const UserProfile = () => {
 
@@ -19,43 +20,35 @@ const UserProfile = () => {
         const enteredNewPassword = newPasswordInputRef.current.value;
         const enteredConfirmPassword = confirmPasswordRef.current.value;
         
-        // add validation
     
-        fetch('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyB89swc_F8hFkPq8xqnZVhKGmv0MrXMkP4', {
+        axios('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyB89swc_F8hFkPq8xqnZVhKGmv0MrXMkP4', {
           method: 'POST',
-          body: JSON.stringify({
+          data: {
             idToken: authCtx.token,
             password: enteredNewPassword,
             returnSecureToken: false
-          }),
+          },
           headers: {
             'Content-Type': 'application/json'
           }
-        }).then(res => {
-          // assumption: Always succeeds!
-          if(res.ok) {
-            return res.json();
+        })
+        .then(response => {
+          if (response.status === 200) {
+          if(enteredNewPassword === enteredConfirmPassword) {
+            history.replace('/')
           } else {
-            return res.json().then((data) => {
-              console.log(data)
-              let errorMessage = 'Authentification fail!'
-              if (data && data.error && data.error.message) {
-                 errorMessage = data.error.message;
-              } 
-              throw new Error(errorMessage);
-            })
+            throw new Error('Password must be the same')
           }
-        }).then((data) => {
-            if(enteredNewPassword === enteredConfirmPassword) {
-                history.replace('/')
-            } else {
-                throw new Error('Password must be the same')
-            }
-            console.log(data)
-          })
-          .catch((err) => {
-            alert(err.message);
-          });
+        }
+        else {
+          throw new Error('Authentification Fail!')
+        }
+        console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error)
+          alert(error.message)
+        })
       };
 
     return (
@@ -63,11 +56,11 @@ const UserProfile = () => {
         <h1>Change Password</h1>  
         <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>New Password</Form.Label>
-            <Form.Control type="password" placeholder="New password" ref={newPasswordInputRef}/>
+            <Form.Control type="password" placeholder="New password" ref={newPasswordInputRef} minLength='6'/>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
             <Form.Label>Confirm Password</Form.Label>
-            <Form.Control type="password" placeholder="Confirm password" ref={confirmPasswordRef}/>
+            <Form.Control type="password" placeholder="Confirm password" ref={confirmPasswordRef} minLength='6'/>
         </Form.Group>
         <Button variant="primary" type="submit">
             Submit

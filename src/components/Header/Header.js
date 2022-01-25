@@ -20,7 +20,7 @@ const Header = () => {
 
     return (
         <header>
-            <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
+            {isLoggedIn ? <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
                 <Container>
 
               <LinkContainer to='/'>
@@ -44,7 +44,7 @@ const Header = () => {
                   </Nav>
               </Navbar.Collapse>
               </Container>
-            </Navbar>
+            </Navbar> : null}
         </header>
     )
 }

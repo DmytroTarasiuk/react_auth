@@ -1,4 +1,5 @@
 import { Form } from "react-bootstrap";
+import axios from "axios";
 
 import { useRef, useState, useContext } from 'react'
 import AuthContext from '../../store/auth-context'
@@ -25,7 +26,6 @@ const AuthForm = () => {
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
-    // optional: Add validation
 
     setIsLoading(true);
     let url;
@@ -37,45 +37,39 @@ const AuthForm = () => {
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB89swc_F8hFkPq8xqnZVhKGmv0MrXMkP4';
     }
     
-    fetch(url, {
+    axios(url, {
       method: 'POST',
-      body: JSON.stringify({
+      data: {
         email: enteredEmail,
         password: enteredPassword,
         returnSecureToken: true,
-      }),
+      },
       headers: {
         'Content-Type': 'application/json',
       },
     })
-      .then((res) => {
-        setIsLoading(false);
-        if (res.ok) {
-          return res.json();
-        } else {
-          return res.json().then((data) => {
-            let errorMessage = 'Authentication failed!';
-            if (data && data.error && data.error.message) {
-              errorMessage = data.error.message;
-            }
-
-            throw new Error(errorMessage);
-          });
-        }
-      })
-      .then((data) => {
-        authCtx.login(data.idToken);
+    .then(response => {
+      if (response.status === 200) {
+        console.log(response.data)
+        authCtx.login(response.data.idToken);
         history.replace('/');
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-  };
-
+      }
+      else {
+        throw new Error("Authenfication Fail!");
+      }
+      
+    })
+    .catch(error => {
+      console.log(error)
+      alert(error.response.data.error.message)
+      setIsLoading(false)
+    })
+  }
+   
 
 
   return (
-<Form onSubmit={submitHandler}>
+<Form onSubmit={submitHandler} className={classes.form}>
 <h1>{isLogin ? 'Login' : 'Sign Up'}</h1> 
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
