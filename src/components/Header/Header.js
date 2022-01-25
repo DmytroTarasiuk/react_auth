@@ -1,9 +1,14 @@
-import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container } from 'react-bootstrap'
+
 import { useContext } from 'react';
 import AuthContext from '../../store/auth-context';
 import classes from './Header.module.css'
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+  } from '@chakra-ui/react'
 
 const Header = () => {
 
@@ -20,31 +25,20 @@ const Header = () => {
 
     return (
         <header>
-            {isLoggedIn ? <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
-                <Container>
+            {isLoggedIn ? <Breadcrumb separator='-'>
+                <BreadcrumbItem>
+                    <BreadcrumbLink  as={Link} to='/cart'><i className="fas fa-shopping-cart"></i> Cart</BreadcrumbLink>
+                </BreadcrumbItem>
 
-              <LinkContainer to='/'>
-                   <Navbar.Brand>LublinJS</Navbar.Brand>
-              </LinkContainer>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                  <Nav className="ml-auto">
-                      <LinkContainer to='/cart'>
-                         <Nav.Link><i className="fas fa-shopping-cart"></i> Cart</Nav.Link>
-                      </LinkContainer>
-                      {!isLoggedIn && <LinkContainer to='/auth'>
-                         <Nav.Link>Login</Nav.Link>
-                      </LinkContainer>}
-                      {isLoggedIn && <LinkContainer to='/profile'>
-                         <Nav.Link>Profile</Nav.Link>
-                      </LinkContainer>}
-                      
-                      {isLoggedIn && <button className={classes.button} onClick={logoutHandler}>Logout</button>}
-                      
-                  </Nav>
-              </Navbar.Collapse>
-              </Container>
-            </Navbar> : null}
+                {!isLoggedIn &&<BreadcrumbItem>
+                    <BreadcrumbLink as={Link} to='/auth'>Login</BreadcrumbLink>
+                </BreadcrumbItem>}
+
+                {isLoggedIn &&<BreadcrumbItem isCurrentPage>      
+                    <BreadcrumbLink as={Link} to='/profile'>Profile</BreadcrumbLink>
+                </BreadcrumbItem>}
+            </Breadcrumb> : null}
+            {isLoggedIn && <button className={classes.button} onClick={logoutHandler}>Logout</button>}
         </header>
     )
 }

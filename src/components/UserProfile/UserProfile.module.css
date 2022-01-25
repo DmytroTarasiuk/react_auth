@@ -1,0 +1,16 @@
+.form {
+    background-color: #eeee;
+    padding: 3rem;
+    box-shadow: 0 4px 5px rgba(49, 43, 43, 0.2);
+    border-radius: 15px;
+  }
+  
+  .form h1 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.form .btn {
+    margin-top: 1rem;
+    width: 100%;
+}

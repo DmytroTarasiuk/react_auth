@@ -1,5 +1,14 @@
-import { Form } from "react-bootstrap";
+//import { Form } from "react-bootstrap";
 import axios from "axios";
+
+import {
+  FormControl,
+  FormLabel,
+  FormHelperText,
+  Input,
+  Container,
+} from '@chakra-ui/react'
+
 
 import { useRef, useState, useContext } from 'react'
 import AuthContext from '../../store/auth-context'
@@ -69,20 +78,21 @@ const AuthForm = () => {
 
 
   return (
-<Form onSubmit={submitHandler} className={classes.form}>
+    <Container maxW='xl' centerContent>
+<form onSubmit={submitHandler} className={classes.form}>
 <h1>{isLogin ? 'Login' : 'Sign Up'}</h1> 
-  <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" ref={emailInputRef}/>
-    <Form.Text className="text-muted">
+  <FormControl>
+    <FormLabel htmlFor='email'>Email address</FormLabel>
+    <Input id='email' type="email" placeholder="Enter email" ref={emailInputRef}/>
+    <FormHelperText>
       We'll never share your email with anyone else.
-    </Form.Text>
-  </Form.Group>
+    </FormHelperText>
+  </FormControl>
 
-  <Form.Group className="mb-3" controlId="formBasicPassword">
-    <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Password" ref={passwordInputRef}/>
-  </Form.Group>
+  <FormControl>
+    <FormLabel htmlFor='password'>Password</FormLabel>
+    <Input id='password' type="password" placeholder="Password" ref={passwordInputRef}/>
+  </FormControl>
   
   <div className={classes.actions}>
     {!isLoading && (
@@ -96,9 +106,10 @@ const AuthForm = () => {
       >
       {isLogin ? 'Create new account' : 'Login with existing account'}
       </button>
-    </div>
+  </div>
   
-</Form>
+</form>
+</Container>
     )
 }
 

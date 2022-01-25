@@ -1,8 +1,16 @@
-import { Form, Button } from "react-bootstrap";
+//import { Form, Button } from "react-bootstrap";
 import { useRef, useContext } from 'react';
 import AuthContext from '../../store/auth-context';
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Container,
+  Button
+} from '@chakra-ui/react'
+import classes from './UserProfile.module.css'
 
 const UserProfile = () => {
 
@@ -52,21 +60,22 @@ const UserProfile = () => {
       };
 
     return (
-      <Form onSubmit={submitHandler}>
+      <Container maxW='xl' centerContent>
+      <form onSubmit={submitHandler} className={classes.form}>
         <h1>Change Password</h1>  
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>New Password</Form.Label>
-            <Form.Control type="password" placeholder="New password" ref={newPasswordInputRef} minLength='6'/>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control type="password" placeholder="Confirm password" ref={confirmPasswordRef} minLength='6'/>
-        </Form.Group>
-        <Button variant="primary" type="submit">
+        <FormControl>
+            <FormLabel htmlFor='password'>New Password</FormLabel>
+            <Input id='password' type="password" placeholder="New password" ref={newPasswordInputRef} minLength='6'/>
+        </FormControl>
+        <FormControl>
+            <FormLabel htmlFor='confrim-password'>Confirm Password</FormLabel>
+            <Input id='confirm-password' type="password" placeholder="Confirm password" ref={confirmPasswordRef} minLength='6'/>
+        </FormControl>
+        <Button colorScheme='blue' type="submit" className={classes.btn}>
             Submit
         </Button>
-        
-      </Form>
+      </form>
+      </Container>
     )
 }
 
