@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import AuthContext from "../store/auth-context";
 import { useContext } from "react";
 import AuthForm from "../components/Auth/AuthForm";
+import React from "react";
 
 
 const HomePage = () => {

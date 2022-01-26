@@ -1,5 +1,5 @@
 //import { Form, Button } from "react-bootstrap";
-import { useRef, useContext } from 'react';
+import React, { useRef, useContext } from 'react';
 import AuthContext from '../../store/auth-context';
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -12,21 +12,21 @@ import {
 } from '@chakra-ui/react'
 import classes from './UserProfile.module.css'
 
-const UserProfile = () => {
+const UserProfile: React.FC = () => {
 
-    const newPasswordInputRef = useRef();
-    const confirmPasswordRef = useRef()
+    const newPasswordInputRef = useRef<HTMLInputElement>(null);
+    const confirmPasswordRef = useRef<HTMLInputElement>(null)
     const history = useHistory()
 
     
 
     const authCtx = useContext(AuthContext)
 
-    const submitHandler = (event) => {
+    const submitHandler = (event: React.FormEvent) => {
         event.preventDefault();
     
-        const enteredNewPassword = newPasswordInputRef.current.value;
-        const enteredConfirmPassword = confirmPasswordRef.current.value;
+        const enteredNewPassword = newPasswordInputRef.current!.value;
+        const enteredConfirmPassword = confirmPasswordRef.current!.value;
         
     
         axios('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyB89swc_F8hFkPq8xqnZVhKGmv0MrXMkP4', {
@@ -65,11 +65,11 @@ const UserProfile = () => {
         <h1>Change Password</h1>  
         <FormControl>
             <FormLabel htmlFor='password'>New Password</FormLabel>
-            <Input id='password' type="password" placeholder="New password" ref={newPasswordInputRef} minLength='6'/>
+            <Input id='password' type="password" placeholder="New password" ref={newPasswordInputRef} />
         </FormControl>
         <FormControl>
             <FormLabel htmlFor='confrim-password'>Confirm Password</FormLabel>
-            <Input id='confirm-password' type="password" placeholder="Confirm password" ref={confirmPasswordRef} minLength='6'/>
+            <Input id='confirm-password' type="password" placeholder="Confirm password" ref={confirmPasswordRef} />
         </FormControl>
         <Button colorScheme='blue' type="submit" className={classes.btn}>
             Submit

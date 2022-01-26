@@ -1,5 +1,5 @@
 
-import { useContext } from 'react';
+import React,  { useContext } from 'react';
 import AuthContext from '../../store/auth-context';
 import classes from './Header.module.css'
 import { useHistory } from 'react-router-dom';
@@ -10,7 +10,7 @@ import {
     BreadcrumbLink,
   } from '@chakra-ui/react'
 
-const Header = () => {
+const Header: React.FC = () => {
 
     const authCtx = useContext(AuthContext);
     const isLoggedIn = authCtx.isLoggedIn;

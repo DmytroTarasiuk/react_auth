@@ -10,15 +10,16 @@ import {
 } from '@chakra-ui/react'
 
 
-import { useRef, useState, useContext } from 'react'
+import React, { useRef, useState, useContext } from 'react'
+import classes from './AuthForm.module.css'
 import AuthContext from '../../store/auth-context'
-import { useHistory } from "react-router-dom";
-import classes from './AuthForm.module.css';
+import { useHistory } from "react-router-dom"
 
-const AuthForm = () => {
+
+const AuthForm: React.FC = () => {
   const history = useHistory();
-  const emailInputRef = useRef();
-  const passwordInputRef = useRef();
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
 
   const authCtx = useContext(AuthContext);
 
@@ -29,11 +30,11 @@ const AuthForm = () => {
     setIsLogin((prevState) => !prevState);
   };
   
-  const submitHandler = (event) => {
+  const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const enteredEmail = emailInputRef.current.value;
-    const enteredPassword = passwordInputRef.current.value;
+    const enteredEmail = emailInputRef.current!.value;
+    const enteredPassword = passwordInputRef.current!.value;
 
 
     setIsLoading(true);
