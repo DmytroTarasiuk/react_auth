@@ -1,9 +1,9 @@
-import AuthForm from "../components/Auth/AuthForm";
 import React from "react";
+import AuthLayout from "../components/Layout/AuthLayout/AuthLayout";
 
 const AuthPage: React.FC = () => {
     return (
-        <AuthForm />
+        <AuthLayout />
     )
 }
 
