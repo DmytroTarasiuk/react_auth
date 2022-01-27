@@ -62,7 +62,7 @@ const AuthForm: React.FC = () => {
       if (response.status === 200) {
         console.log(response.data)
         authCtx.login(response.data.idToken);
-        history.replace('/admin');
+        history.replace('/dashboard');
       }
       else {
         throw new Error("Authenfication Fail!");

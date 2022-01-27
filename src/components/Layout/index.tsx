@@ -1,20 +1,14 @@
-import React, { Fragment } from 'react';
+import React from "react";
 
-import Header from '../Header/Header';
-import classes from './Layout.module.css'
-import Menu from '../Menu/Menu';
-import Orders from '../Orders/Orders';
-
+import { Switch, Route } from "react-router-dom";
+import AdminPage from "../../pages/AdminPage";
 
 const Layout: React.FC = () => {
   return (
-    <Fragment>
-      <Header />
-      <main className={classes.main}>
-        <Menu />
-        <Orders />
-      </main>
-    </Fragment>
+    <Switch>
+      <Route exact path="/dashboard"render={() => <AdminPage />}>
+      </Route>
+    </Switch>
   );
 };
 

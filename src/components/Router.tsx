@@ -1,26 +1,22 @@
-import React, { useContext } from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import AdminPage from '../pages/AdminPage'
-import AuthPage from '../pages/AuthPage'
-import AuthContext from '../store/auth-context'
+import React, { useContext } from "react";
+import { Switch, Route, Redirect} from "react-router-dom";
 
+import AuthContext from "../store/auth-context";
+import AuthLayout from "./Layout/AuthLayout/AuthLayout";
+import Layout from "./Layout";
 
 const Router: React.FC = () => {
-
-    const authCtx = useContext(AuthContext);
-
-    return (
-        <Switch>
-            <Route path='/admin'>
-                {authCtx.isLoggedIn && <AdminPage />}
-                {!authCtx.isLoggedIn && <Redirect to='/' />}
-            </Route>
-            <Route path='/' exact>
-                <AuthPage />
-            </Route>
-        </Switch>
-    )
-}
+  const authCtx = useContext(AuthContext);
 
 
-export default Router
+  return (
+    <Switch>
+      <Route exact path="/" component={AuthLayout} />
+
+      {authCtx.isLoggedIn && <Route exact path="/dashboard" component={Layout} />}
+      {!authCtx.isLoggedIn && <Redirect to="/" />}
+    </Switch>
+  );
+};
+
+export default Router;

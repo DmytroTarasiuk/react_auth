@@ -1,10 +1,14 @@
 import React from 'react';
-import AuthForm from '../../Auth/AuthForm';
 
+import AuthPage from '../../../pages/AuthPage';
+import { Switch, Route } from 'react-router-dom'
 
 const AuthLayout: React.FC = () => {
   return (
-          <AuthForm />
+    <Switch>
+      <Route exact path="/"render={() => <AuthPage />}>
+      </Route>
+    </Switch>
   );
 };
 
