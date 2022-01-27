@@ -1,12 +1,17 @@
-body {
-  background-color: #fafafa;
-}
-
 .form {
   background-color: #eeee;
   padding: 3rem;
   box-shadow: 0 4px 5px rgba(49, 43, 43, 0.2);
   border-radius: 15px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: 100vh;
 }
 
 .form h1 {

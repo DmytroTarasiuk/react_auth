@@ -1,17 +1,9 @@
-
 import React,  { useContext } from 'react';
 import AuthContext from '../../store/auth-context';
 import classes from './Header.module.css'
 import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-  } from '@chakra-ui/react'
 
 const Header: React.FC = () => {
-
     const authCtx = useContext(AuthContext);
     const isLoggedIn = authCtx.isLoggedIn;
 
@@ -24,20 +16,8 @@ const Header: React.FC = () => {
     };
 
     return (
-        <header>
-            {isLoggedIn ? <Breadcrumb separator='-'>
-                <BreadcrumbItem>
-                    <BreadcrumbLink  as={Link} to='/cart'><i className="fas fa-shopping-cart"></i> Cart</BreadcrumbLink>
-                </BreadcrumbItem>
-
-                {!isLoggedIn &&<BreadcrumbItem>
-                    <BreadcrumbLink as={Link} to='/auth'>Login</BreadcrumbLink>
-                </BreadcrumbItem>}
-
-                {isLoggedIn &&<BreadcrumbItem isCurrentPage>      
-                    <BreadcrumbLink as={Link} to='/profile'>Profile</BreadcrumbLink>
-                </BreadcrumbItem>}
-            </Breadcrumb> : null}
+        <header className={classes.header}>
+            <h1>Header Component</h1>
             {isLoggedIn && <button className={classes.button} onClick={logoutHandler}>Logout</button>}
         </header>
     )

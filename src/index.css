@@ -9,6 +9,10 @@ body {
   margin: 0;
 }
 
+h1 {
+  font-size: 5.2rem;
+}
+
 h1,
 h2,
 h3,

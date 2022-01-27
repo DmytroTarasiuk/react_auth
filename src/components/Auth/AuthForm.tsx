@@ -62,7 +62,7 @@ const AuthForm: React.FC = () => {
       if (response.status === 200) {
         console.log(response.data)
         authCtx.login(response.data.idToken);
-        history.replace('/');
+        history.replace('/admin');
       }
       else {
         throw new Error("Authenfication Fail!");
@@ -79,7 +79,7 @@ const AuthForm: React.FC = () => {
 
 
   return (
-    <Container maxW='xl' centerContent>
+    <Container maxW='xl' centerContent className={classes.container}>
 <form onSubmit={submitHandler} className={classes.form}>
 <h1>{isLogin ? 'Login' : 'Sign Up'}</h1> 
   <FormControl>
