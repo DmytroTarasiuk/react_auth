@@ -3,7 +3,7 @@ import AuthContext from '../../store/auth-context';
 import classes from './Header.module.css'
 import { useHistory } from 'react-router-dom';
 
-const Header: React.FC = () => {
+const Header = () => {
     const authCtx = useContext(AuthContext);
     const isLoggedIn = authCtx.isLoggedIn;
 

@@ -9,7 +9,7 @@ import Header from "../Header/Header";
 
 import { Grid, GridItem } from '@chakra-ui/react'
 
-const Layout: React.FC = () => {
+const Layout = () => {
   return (
     <>
         <Header />

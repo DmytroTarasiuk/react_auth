@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 
 
-const AuthLayout: React.FC = () => {
+const AuthLayout = () => {
   return (
   <Container maxW='xl' centerContent className={classes.container}>
     <AuthForm />

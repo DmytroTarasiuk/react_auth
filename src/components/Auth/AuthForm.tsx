@@ -15,7 +15,7 @@ import AuthContext from '../../store/auth-context'
 import { useHistory } from "react-router-dom"
 
 
-const AuthForm: React.FC = () => {
+const AuthForm = () => {
   const history = useHistory();
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
