@@ -1,9 +1,10 @@
 import React from "react";
-import AuthForm from "../components/Auth/AuthForm";
 
 const AuthPage: React.FC = () => {
     return (
-        <AuthForm />
+        <section>
+            <h2>Welcome on board</h2>
+        </section>
     )
 }
 

@@ -6,12 +6,11 @@ import {
   FormLabel,
   FormHelperText,
   Input,
-  Container,
 } from '@chakra-ui/react'
 
 
 import React, { useRef, useState, useContext } from 'react'
-import classes from './AuthForm.module.css'
+import classes from '../Layout/AuthLayout/AuthLayout.module.css'
 import AuthContext from '../../store/auth-context'
 import { useHistory } from "react-router-dom"
 
@@ -79,7 +78,7 @@ const AuthForm: React.FC = () => {
 
 
   return (
-    <Container maxW='xl' centerContent className={classes.container}>
+    
 <form onSubmit={submitHandler} className={classes.form}>
 <h1>{isLogin ? 'Login' : 'Sign Up'}</h1> 
   <FormControl>
@@ -108,9 +107,8 @@ const AuthForm: React.FC = () => {
       {isLogin ? 'Create new account' : 'Login with existing account'}
       </button>
   </div>
-  
 </form>
-</Container>
+
     )
 }
 
